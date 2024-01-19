@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export type RegisterFormData = {
   firstName: string;
@@ -13,6 +14,8 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { showToast } = useAppContext();
@@ -46,6 +49,7 @@ const Register = () => {
         <label className="text-gray-700 text-sm font-bold flex-1">
           First Name
           <input
+            placeholder="Write your first name"
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("firstName", { required: "This field is required" })}
           ></input>
@@ -56,6 +60,7 @@ const Register = () => {
         <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
           <input
+            placeholder="Write your last name"
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("lastName", { required: "This field is required" })}
           ></input>
@@ -68,6 +73,7 @@ const Register = () => {
         Email
         <input
           type="email"
+          placeholder="Write your email address"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("email", { required: "This field is required" })}
         ></input>
@@ -77,36 +83,56 @@ const Register = () => {
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Password
-        <input
-          type="password"
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("password", {
-            required: "This field is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        ></input>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Write your password"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("password", {
+              required: "This field is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         {errors.password && (
           <span className="text-red-500">{errors.password.message}</span>
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Confirm Password
-        <input
-          type="password"
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("confirmPassword", {
-            validate: (val) => {
-              if (!val) {
-                return "This field is required";
-              } else if (watch("password") !== val) {
-                return "Your passwords do no match";
-              }
-            },
-          })}
-        ></input>
+        <div className="relative">
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirm your password"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("confirmPassword", {
+              validate: (val) => {
+                if (!val) {
+                  return "This field is required";
+                } else if (watch("password") !== val) {
+                  return "Your passwords do not match";
+                }
+              },
+            })}
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         {errors.confirmPassword && (
           <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}

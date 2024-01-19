@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export type SignInFormData = {
   email: string;
@@ -10,6 +11,7 @@ export type SignInFormData = {
 };
 
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -44,6 +46,7 @@ const SignIn = () => {
         Email
         <input
           type="email"
+          placeholder="Write your email address"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("email", { required: "This field is required" })}
         ></input>
@@ -53,17 +56,27 @@ const SignIn = () => {
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Password
-        <input
-          type="password"
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("password", {
-            required: "This field is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        ></input>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Write your password"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("password", {
+              required: "This field is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         {errors.password && (
           <span className="text-red-500">{errors.password.message}</span>
         )}
