@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 import User from "../models/user";
-import brcypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import verifyToken from "../middleware/auth";
 
@@ -26,12 +26,12 @@ router.post(
     try {
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "Invalid Credentials" });
       }
 
-      const isMatch = await brcypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "Invalid Credentials" });
       }
 
       const token = jwt.sign(

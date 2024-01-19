@@ -1,9 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import * as apiClient from "../api-client"
-import { useAppContext } from "../context/AppContext";
+import * as apiClient from "../api-client";
+import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
-
 
 export type RegisterFormData = {
   firstName: string;
@@ -16,7 +15,7 @@ export type RegisterFormData = {
 const Register = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const {showToast} = useAppContext();
+  const { showToast } = useAppContext();
 
   const {
     register,
@@ -27,14 +26,14 @@ const Register = () => {
 
   const mutation = useMutation(apiClient.register, {
     onSuccess: async () => {
-      showToast({message: "Registration Success!", type: "SUCCESS"});
+      showToast({ message: "Registration Success!", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
       navigate("/");
     },
     onError: (error: Error) => {
-      showToast({message: error.message, type: "ERROR"})
-    }
-  })
+      showToast({ message: error.message, type: "ERROR" });
+    },
+  });
 
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
@@ -44,55 +43,58 @@ const Register = () => {
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Create an Account</h2>
       <div className="flex flex-col md:flex-row gap-5">
-        <label className="text-gray-700 text-sm font-bold">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           First Name
           <input
-            placeholder="Your first name"
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("firstName", { required: "This file is required" })}
-          />
-          {errors.firstName && (<span className="text-red-500">{errors.firstName.message}</span>)}
+            {...register("firstName", { required: "This field is required" })}
+          ></input>
+          {errors.firstName && (
+            <span className="text-red-500">{errors.firstName.message}</span>
+          )}
         </label>
-        <label className="text-gray-700 text-sm font-bold">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
           <input
-            placeholder="Your last name"
             className="border rounded w-full py-1 px-2 font-normal"
-            {...register("lastName", { required: "This file is required" })}
-          />
-          {errors.lastName && (<span className="text-red-500">{errors.lastName.message}</span>)}
+            {...register("lastName", { required: "This field is required" })}
+          ></input>
+          {errors.lastName && (
+            <span className="text-red-500">{errors.lastName.message}</span>
+          )}
         </label>
       </div>
-      <label className="text-gray-700 text-sm font-bold">
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Email
         <input
-          placeholder="Your email"
           type="email"
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("email", { required: "This file is required" })}
-        />
-        {errors.email && (<span className="text-red-500">{errors.email.message}</span>)}
+          {...register("email", { required: "This field is required" })}
+        ></input>
+        {errors.email && (
+          <span className="text-red-500">{errors.email.message}</span>
+        )}
       </label>
-      <label className="text-gray-700 text-sm font-bold">
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Password
         <input
-          placeholder="Your password"
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("password", {
-            required: "This file is required",
+            required: "This field is required",
             minLength: {
               value: 6,
               message: "Password must be at least 6 characters",
             },
           })}
-        />
-        {errors.password && (<span className="text-red-500">{errors.password.message}</span>)}
+        ></input>
+        {errors.password && (
+          <span className="text-red-500">{errors.password.message}</span>
+        )}
       </label>
-      <label className="text-gray-700 text-sm font-bold">
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Confirm Password
         <input
-          placeholder="Confirm Password"
           type="password"
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("confirmPassword", {
@@ -100,12 +102,14 @@ const Register = () => {
               if (!val) {
                 return "This field is required";
               } else if (watch("password") !== val) {
-                return "Your password do no match";
+                return "Your passwords do no match";
               }
             },
           })}
-        />
-        {errors.confirmPassword && (<span className="text-red-500">{errors.confirmPassword.message}</span>)}
+        ></input>
+        {errors.confirmPassword && (
+          <span className="text-red-500">{errors.confirmPassword.message}</span>
+        )}
       </label>
       <span>
         <button
