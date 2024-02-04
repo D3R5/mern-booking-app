@@ -47,7 +47,17 @@ STRIPE_API_KEY=
 6.**Frontend URL:**
   - Your **FRONTEND_URL** points to the location of your backend (usually **http://localhost:7000**).
 
-
+## Start the application
+1. Backend:
+  - Go to the **backend** folder
+  - At the end of the **backend** folder type: **npm install**
+  - Start the server with: **npm start**
+    
+2. Frontend:
+  - Go to the **frontend** folder
+  - At the end of the **frontend** folder type: **npm install**
+  - Start the application with: **npm run dev**
+  - Go to the browser and search: **http://localhost:5173**
 
 
 
