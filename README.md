@@ -61,7 +61,7 @@ STRIPE_API_KEY=
   - Start the application with: **npm run dev**
   - Go to the browser and search: **http://localhost:5173**
 
-#Images: 
+# Images: 
 ### Homepage:
 ![homepage](https://github.com/D3R5/mern-booking-app/assets/117954097/db166679-fc2d-4307-b089-6d8a588b9b07)
 ### Create account
