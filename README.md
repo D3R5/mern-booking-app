@@ -13,15 +13,15 @@
 - Go to the backend folder and create 2 files: .env and .env.e2e, then add this content in both of them:
   ```
 MONGODB_CONNECTION_STRING=
-
+```
 JWT_SECRET_KEY=
 FRONTEND_URL=
-
+```
 # Cloudinary Variables
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-
+```
 # Stripe
 STRIPE_API_KEY=
   ```
