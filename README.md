@@ -7,6 +7,8 @@
 - Reservation management, to view and manage reservations.
 - Recent hotels on the homepage, to keep the content dynamic.
 
+# [Deployed](https://mern-booking-app-krrt.onrender.com)
+
 ## Clone repository
 
 ## Backend configuration
@@ -47,7 +49,7 @@ STRIPE_API_KEY=
 6.**Frontend URL:**
   - Your **FRONTEND_URL** points to the location of your backend (usually **http://localhost:7000**).
 
-## Start the application
+## **Start the application**
 1. Backend:
   - Go to the **backend** folder
   - At the end of the **backend** folder type: **npm install**
@@ -58,6 +60,12 @@ STRIPE_API_KEY=
   - At the end of the **frontend** folder type: **npm install**
   - Start the application with: **npm run dev**
   - Go to the browser and search: **http://localhost:5173**
+
+#Images: 
+### Homepage:
+![homepage](https://github.com/D3R5/mern-booking-app/assets/117954097/db166679-fc2d-4307-b089-6d8a588b9b07)
+### Create account
+![createaccount](https://github.com/D3R5/mern-booking-app/assets/117954097/4ba174e0-afad-4321-9c49-46a42101ca6b)
 
 
 
