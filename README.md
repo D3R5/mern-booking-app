@@ -26,26 +26,26 @@ CLOUDINARY_API_SECRET=
 STRIPE_API_KEY=
 ```
 
-2. MongoDB Setup:
-- Create an account in mongoDB Atlas
-- Create a new cluster for the database
-- Get the MongoDB connection and add it to **MONGODB_CONNECTION_STRING** in the .**env** files.
+2. **MongoDB Setup:**
+  - Create an account in mongoDB Atlas
+  - Create a new cluster for the database
+  - Get the MongoDB connection and add it to **MONGODB_CONNECTION_STRING** in the .**env** files.
 
-3. Cloudinary Setup:
-- Create an account at Cloudinary
-- In your dashboard find your cloud name, API key, API secret.
-- Add the variables in your **Cloudinary Variables** in your **.env** files.
+3. **Cloudinary Setup:**
+  - Create an account at Cloudinary
+  - In your dashboard find your cloud name, API key, API secret.
+  - Add the variables in your **Cloudinary Variables** in your **.env** files.
 
-4. Stripe Setup:
-- Create an account at Stripe
-- In your dashboard find your API key.
-- Add your API key in yout **Stripe** in your **.env** file.
+4. **Stripe Setup:**
+  - Create an account at Stripe
+  - In your dashboard find your API key.
+  - Add your API key in yout **Stripe** in your **.env** file.
 
-5. JWT_SECRET_KEY:
-- Add a random key.
+5. **JWT_SECRET_KEY:**
+  - Add a random key.
 
-6. Frontend URL:
-- Your **FRONTEND_URL** points to the location of your backend (usually **http://localhost:7000**).
+6.**Frontend URL:**
+  - Your **FRONTEND_URL** points to the location of your backend (usually **http://localhost:7000**).
 
 
 
